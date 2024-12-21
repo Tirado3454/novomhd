@@ -6,7 +6,7 @@ if "etapas" not in st.session_state:
 if "descricao_etapa" not in st.session_state:
     st.session_state.descricao_etapa = ""
 if "topico_selecionado" not in st.session_state:
-    st.session_state.topico_selecionado = ""
+    st.session_state.topico_selecionado = "Base Teórica"  # Inicialização padrão
 
 # Função para adicionar etapa
 def adicionar_etapa():
@@ -20,14 +20,29 @@ def adicionar_etapa():
         st.session_state.descricao_etapa = ""  # Limpar o campo de descrição
 
 # Títulos e introdução
-st.title("Interface MHD - Etapas Escritas")
+st.markdown(
+    """
+    <h1>
+        <img src='data:image/png;base64,<insira_o_base64_gerado_da_logo_aqui>' style='height:50px; margin-right:10px;'> Modelo Hipotético-Dedutivo no Xadrez
+    </h1>
+    """,
+    unsafe_allow_html=True
+)
 st.header("Etapas do Modelo Hipotético-Dedutivo")
 
 # Seção de seleção de tópicos
 st.subheader("Tópicos do MHD")
-topicos_mhd = ["Base Teórica", "Observação", "Formulação de Hipóteses", "Dedução", "Teste por Experimento", "Análise dos Resultados", "Conclusão"]
+topicos_mhd = [
+    "Base Teórica",
+    "Observação",
+    "Formulação de Hipóteses",
+    "Dedução",
+    "Teste por Experimento",
+    "Análise dos Resultados",
+    "Conclusão",
+]
 st.session_state.topico_selecionado = st.selectbox(
-    "Selecione um tópico do MHD:", topicos_mhd, index=0
+    "Selecione um tópico do MHD:", topicos_mhd
 )
 
 # Exibir dica com base no tópico selecionado
@@ -38,7 +53,7 @@ dicas = {
     "Dedução": "Deduza as consequências lógicas das hipóteses formuladas.",
     "Teste por Experimento": "Teste suas hipóteses de maneira controlada.",
     "Análise dos Resultados": "Analise os dados obtidos para validar ou refutar a hipótese.",
-    "Conclusão": "Elabore uma conclusão baseada nas observações e experimentos realizados."
+    "Conclusão": "Elabore uma conclusão baseada nas observações e experimentos realizados.",
 }
 if st.session_state.topico_selecionado in dicas:
     st.info(dicas[st.session_state.topico_selecionado])
